@@ -12,6 +12,10 @@ public class PracticaSiete{
       Derivador derivador = new Derivador();
       derivador.setPolinomioGrado();
       derivador.setFuncionPolinomial();
-      derivador.Derivar();
+      System.out.println("F(x): "+Arrays.toString(derivador.getFuncionPolinomial()));
+      System.out.println("F'(x): "+Arrays.toString(derivador.Derivar()));
+      System.out.println("F("+3.0+"): "+derivador.Evaluar(derivador.getFuncionPolinomial(),2));
+      System.out.println("F'("+3.0+"): "+derivador.Evaluar(derivador.Derivar(),2));
+      
     }
 }

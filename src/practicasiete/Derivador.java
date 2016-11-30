@@ -27,9 +27,12 @@ public class Derivador {
             this.funcionPolinomial[contador] = funcionPolinomial[contador];
         }   
     }
-    
+        
     public Derivador(Derivador d){
         polinomioGrado = d.polinomioGrado;
+        for(int contador = 0; contador <polinomioGrado+1; contador++){
+            this.funcionPolinomial[contador] = d.funcionPolinomial[contador];
+        }
     }
 
     public int getPolinomioGrado() {
@@ -66,13 +69,19 @@ public class Derivador {
         }
     }
     
+    public double Evaluar(double expresion[], double x){
+        double Fx = 0;
+        for(int i = 0; i <expresion.length; i++){
+            Fx += Math.pow(x,expresion.length-1)*expresion[i];
+        }
+        return Fx;
+    }
+    
     public double[] Derivar(){
       double funcionDerivada[] = new double[funcionPolinomial.length-1];
       for(int i = 0; i < funcionPolinomial.length-1; i++){
         funcionDerivada[i] = funcionPolinomial[i]*(funcionPolinomial.length-i-1);
       }
-      System.out.println(Arrays.toString(funcionPolinomial));
-      System.out.println(Arrays.toString(funcionDerivada));
       return funcionDerivada;
     }
     
