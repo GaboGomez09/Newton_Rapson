@@ -72,7 +72,7 @@ public class Derivador {
     public double Evaluar(double expresion[], double x){
         double Fx = 0;
         for(int i = 0; i <expresion.length; i++){
-            Fx += Math.pow(x,expresion.length-1)*expresion[i];
+            Fx += Math.pow(x,expresion.length-1-i)*expresion[i];
         }
         return Fx;
     }
