@@ -14,12 +14,10 @@ public class PracticaSiete{
       derivador.setFuncionPolinomial();
       System.out.println("F(x): "+Arrays.toString(derivador.getFuncionPolinomial()));
       System.out.println("F'(x): "+Arrays.toString(derivador.Derivar()));
-      
-      NewtonRaphson nr = new NewtonRaphson(derivador, 3, 0);
-      
-      double x = 2;
-      System.out.println("F("+x+"): "+nr.Evaluar(derivador.getFuncionPolinomial(),x));
-      System.out.println("F'("+x+"): "+nr.Evaluar(derivador.Derivar(),x));
-      
+
+      NewtonRaphson nr = new NewtonRaphson(derivador);
+      nr.setIteraciones();
+      nr.setX0();
+      nr.Converge();
     }
 }

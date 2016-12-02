@@ -5,6 +5,8 @@
  */
 package practicasiete;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Gabriel
@@ -12,7 +14,7 @@ package practicasiete;
 public class NewtonRaphson {
     private Derivador derivador;
     private int iteraciones;
-    private int x0;
+    private double x0;
 
     public NewtonRaphson() {
         derivador = new Derivador();
@@ -20,10 +22,17 @@ public class NewtonRaphson {
         x0 = 0;
     }
 
-    public NewtonRaphson(Derivador derivador, int iteraciones, int x0) {
+    public NewtonRaphson(Derivador derivador, int iteraciones, double x0) {
         this.derivador = new Derivador(derivador);
         this.iteraciones = iteraciones;
         this.x0 = x0;
+    }
+    
+
+    public NewtonRaphson(Derivador derivador) {
+        this.derivador = new Derivador(derivador);
+        iteraciones = 0;
+        x0 = 0;
     }
     
     public NewtonRaphson(NewtonRaphson nr){
@@ -32,20 +41,70 @@ public class NewtonRaphson {
         this.x0 = nr.x0;
     }
     
-    public double Evaluar(double expresion[], double x){
-        double Fx = 0;
+    public Derivador getDerivador() {
+        return derivador;
+    }
+
+    public void setDerivador(Derivador derivador) {
+        this.derivador = new Derivador(derivador);
+    }
+
+    public int getIteraciones() {
+        return iteraciones;
+    }
+
+    public void setIteraciones(int iteraciones) {
+        this.iteraciones = iteraciones;
+    }
+
+    public void setIteraciones(){
+        System.out.println("Cuantas veces desea iterar?");
+        Scanner scan = new Scanner(System.in);
+        iteraciones = scan.nextInt();
+    }    
+    
+    public double getX0() {
+        return x0;
+    }
+
+    public void setX0(double x0) {
+        this.x0 = x0;
+    }
+    
+    public void setX0(){
+        System.out.println("Con que valor desea inicializar X0?");
+        Scanner scan = new Scanner(System.in);
+        x0 = scan.nextDouble();
+    }
+    
+    
+    public int Evaluar(double expresion[], double x){
+        int Fx = 0;
         for(int i = 0; i <expresion.length; i++){
-            Fx += Math.pow(x,expresion.length-1)*expresion[i];
+            Fx += Math.pow(x,expresion.length-1-i)*expresion[i];
         }
         return Fx;
     }
-    
-    
+ 
     public void Converge(){
-        for(int contador = 0; contador<iteraciones; contador++){
-            
+        double temp, factor = 0, A, B;
+        try{
+            for(int contador = 0; contador<iteraciones; contador++){
+                temp = x0;
+                A = Evaluar(derivador.getFuncionPolinomial(),temp);
+                B = Evaluar(derivador.Derivar(),temp);
+                if(B == 0){
+                    factor = (int)A/(int)B;
+                }else{
+                    factor = A/B;
+                }       
+                x0 = temp - factor;          
+            }
+            System.out.println("X =  " + x0);
+        }catch(ArithmeticException ae){
+            ae.printStackTrace();
+            System.out.println("Esta dividiendo entre cero");
         }
     }
-    
-    
+   
 }
