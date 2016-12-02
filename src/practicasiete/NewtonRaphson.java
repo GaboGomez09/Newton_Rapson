@@ -88,20 +88,23 @@ public class NewtonRaphson {
  
     public void Converge(){
         double temp, factor = 0, A, B;
-        for(int contador = 0; contador<iteraciones; contador++){
-            temp = x0;
-            A = Evaluar(derivador.getFuncionPolinomial(),temp);
-            B = Evaluar(derivador.Derivar(),temp);
-            if(B == 0){
-                int cero = 0;
-                factor = (int) (A/cero);
-            }else{
-                factor = A/B;
+        try{
+            for(int contador = 0; contador<iteraciones; contador++){
+                temp = x0;
+                A = Evaluar(derivador.getFuncionPolinomial(),temp);
+                B = Evaluar(derivador.Derivar(),temp);
+                if(B == 0){
+                    factor = (int)A/(int)B;
+                }else{
+                    factor = A/B;
+                }       
+                x0 = temp - factor;          
             }
-            x0 = temp - factor;
-            
+            System.out.println("X =  " + x0);
+        }catch(ArithmeticException ae){
+            ae.printStackTrace();
+            System.out.println("Esta dividiendo entre cero");
         }
-        System.out.println("X =  " + x0);
     }
    
 }
