@@ -18,11 +18,12 @@ public class Derivador {
     
     public Derivador() {
         polinomioGrado = 1;
-        funcionPolinomial = new double[polinomioGrado+1];;
+        funcionPolinomial = new double[polinomioGrado+1];
     }
 
     public Derivador(int polinomioGrado, double[] funcionPolinomial) {
         this.polinomioGrado = polinomioGrado;
+        funcionPolinomial = new double[polinomioGrado+1];
         for(int contador = 0; contador <polinomioGrado+1; contador++){
             this.funcionPolinomial[contador] = funcionPolinomial[contador];
         }   
@@ -30,6 +31,7 @@ public class Derivador {
         
     public Derivador(Derivador d){
         polinomioGrado = d.polinomioGrado;
+        funcionPolinomial = new double[polinomioGrado+1];
         for(int contador = 0; contador <polinomioGrado+1; contador++){
             this.funcionPolinomial[contador] = d.funcionPolinomial[contador];
         }
@@ -67,14 +69,6 @@ public class Derivador {
             System.out.println("Coeficiente del termino grado " +  (polinomioGrado-i) +  ":");
             funcionPolinomial[i] = scan.nextDouble();
         }
-    }
-    
-    public double Evaluar(double expresion[], double x){
-        double Fx = 0;
-        for(int i = 0; i <expresion.length; i++){
-            Fx += Math.pow(x,expresion.length-1)*expresion[i];
-        }
-        return Fx;
     }
     
     public double[] Derivar(){
